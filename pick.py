@@ -53,6 +53,11 @@ def choose_questions_subject(list_structure, amount):
     # All the chosen questions will be added to this list
     question_list = []
 
+    # Now getting the maximum amount of usages in the given list structure, so basically the amount of usages for
+    # the question, that has been used the most, as all other questions stand in contrast to this local reference
+    # originating from the same subject.
+    maximum_usage_amount = get_max_amount_usages(list_structure)
+
     # Repeating the process of choosing a question or not as long as the desired amount of questions has been
     # chosen and added to the final list
     while len(question_list) < amount:
@@ -60,17 +65,47 @@ def choose_questions_subject(list_structure, amount):
         # The first step is to randomly choose one item, in this case a sublist, from the list structure
         sublist = random.choice(list_structure)
 
-        # Now getting the total amount of uses, substracting the amount of uses of the chosen sublist/question from
-        # this total amount
-        total_uses = get_total_uses()
-        difference = total_uses - sublist[1]
+        # Building the difference between the maximum amount of usages of this subject and the actual amount of
+        # usages for the randomly chosen question, which creates higher numbers, the lower the use amount of the
+        # chosen question is
+        difference = maximum_usage_amount - sublist[1]
 
         # Now generating a random number between 0 and 10, if the number is smaller than the difference, the question
-        # will be picked and added to the main list, if not the while loop will just continue
+        # will be picked and added to the main list, if not the while loop will just continue. By this practice, if the
+        # difference number is bigger, the probability of the question being chosen is higher, thus the probability
+        # for questions with a low use count(->higher difference) is higher.
         random_number = random.randint(1, 10)
         if random_number <= difference:
             question = sublist[0]
             question_list.append(question)
 
     return question_list
+
+
+def get_max_amount_usages(list_structure):
+    """
+    For a given list structure, as it is the value to one of the subjects in the dictionary structure, that is loaded
+    from the file system, this function will get the maximum amount for a question in the set
+
+    Args:
+        list_structure:  A list, containing sub lists, who in turn have to contain two items, the first being the string
+            question and the second being the integer amount of times it was used already.
+
+    Returns:
+    The integer amount of the amount og usages of the question in the list, that has been used the most, so basically
+    the biggest usage amount in the list
+    """
+    max_amount = 0
+    for sublist in list_structure:
+
+        # The amount a question of the list structure of the given subject has been used already is always given by
+        # the integer, that is the second element of each sublist
+        usages = sublist[1]
+        # In case the new iteration of the loop found an amount fo usages that is bigger than all the previous ones
+        # the saved number will be replaced with the new one
+        if usages > max_amount:
+            max_amount = usages
+
+    # At the end of the loop the maximum amount of all the usages should have been found and is returned
+    return max_amount
 
