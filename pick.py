@@ -56,7 +56,7 @@ def choose_questions_subject(list_structure, amount):
     # Now getting the maximum amount of usages in the given list structure, so basically the amount of usages for
     # the question, that has been used the most, as all other questions stand in contrast to this local reference
     # originating from the same subject.
-    maximum_usage_amount = get_max_amount_usages(list_structure)
+    maximum_usage_amount = get_max_amount_usages(list_structure) + 1
 
     # Repeating the process of choosing a question or not as long as the desired amount of questions has been
     # chosen and added to the final list

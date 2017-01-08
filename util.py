@@ -1,4 +1,6 @@
 import configparser
+import datetime
+import time
 
 
 def get_project_path():
@@ -87,3 +89,45 @@ def get_gmail_password():
     gmail_password = gmail_password
 
     return gmail_password
+
+
+def get_archive_path():
+    """
+    Reads the confog file of this project to get the path of the folder in which the path to the folder, where the
+    sent mails are supposed to be archived
+    Returns:
+    The string of the path to the folder of the archive
+    """
+    # Creating the config parser, that reads the INI config file of this project
+    config_parser = configparser.ConfigParser()
+    config_parser.read('config.ini')
+
+    archive_path = config_parser['Paths']['archive_path']
+
+    return archive_path
+
+
+def get_date_string():
+    """
+    Accesses the current date and time from as given from the operating system and the creates a formatted string from
+    the current date. The day being first, the mont second and the year last, all three being separated by an
+    underscore
+    Returns:
+    The string, containing the day, mont and year of when this function was called
+    """
+    # Creating the timestamp for the current time
+    get_current_timestamp = time.time()
+    # Creating the datetime obejct for the current datetime from the timestamp
+    current_datetime = datetime.datetime.fromtimestamp(get_current_timestamp)
+
+    # Getting the relevant information about the current date from the datetime object, which is the year, month and
+    # the day
+    year = current_datetime.year
+    month = current_datetime.month
+    day = current_datetime.day
+
+    # Creating the formatted string of the date
+    date_string_list = [str(day), '_', str(month), '_', str(year)]
+    date_string = ''.join(date_string_list)
+
+    return date_string

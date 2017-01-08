@@ -49,8 +49,8 @@ def get_main_body(dictionary_structure):
     for subject in dictionary_structure.keys():
         question_list = dictionary_structure[subject]
         # Building the header for the subject in as string in caps
-        header = subject.upper()
-        string_list.append(header)
+        header = ["#"*(len(subject) + 2), "\n#", subject.upper(), "#\n", "#"*(len(subject) + 2)]
+        string_list.append(''.join(header))
         string_list.append('\n\n')
 
         # Adding the Questions to the list

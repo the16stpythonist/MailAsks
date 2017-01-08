@@ -1,4 +1,5 @@
 from MailAsks.util import get_project_path
+from MailAsks.util import get_archive_path
 
 import os
 
@@ -167,4 +168,50 @@ def update_files(dictionary_structure_chosen):
             # Writing the new lines list to the file
             file_content = '\n'.join(lines)
             file.write(file_content)
+
+
+def archive(date_string, mail_content):
+    """
+    Given the string format of a date and the content of a mail string this function will create a file with a name
+    derived from the date string inside the folder, that is specified as the archive folder in the config of the
+    project and will then save the given string content to that file, thus archiving its content.
+    The function checks for already existing files for the same date, instead of overwriting them though the file name
+    will be extended by an additional index number.
+
+    Args:
+        date_string: The string format of the current date
+        mail_content:  The string of the content, that is supposed to be archived
+
+    Returns:
+    void
+    """
+    # Getting the string of  the folder in which the archive files are supposed to be saved in from the config file
+    archive_path = get_archive_path()
+    # Creating the actual path of the file to save from the archive path and the filename from the date string
+    file_name = "{}.txt".format(date_string)
+    file_path = os.path.join(archive_path, file_name)
+
+    # First checking how how many files for the current date already exist
+    already_exists = True
+    index = 2
+    while already_exists:
+        # Checking for the existence of the just assembled file path, in case the path does indeed exist, the file name
+        # will be extended by an additional number at the end, repeating the process of checking the new file name
+        # until a number has been found for which no file already exists.
+        if os.path.exists(file_path):
+            # Adding the index number to the string
+            file_path.replace(".txt", "({}).txt".format(index))
+            index += 1
+
+        else:
+            # Breaking the loop in case the file path does not exist
+            already_exists = False
+
+    # Creating and opening the file with the file path and then writing the given mail content to it
+    with open(file_path, "w+") as file:
+        file.write(mail_content)
+
+
+
+
 

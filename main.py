@@ -1,12 +1,14 @@
 from MailAsks.persistency import get_questions
 from MailAsks.persistency import update_files
+from MailAsks.persistency import archive
 from MailAsks.format import simple_string_format
 from MailAsks.util import get_amount_questions
+from MailAsks.util import get_date_string
 from MailAsks.pick import choose_questions
 from MailAsks.mail import send
 
 
-def send_mail(recipients):
+def send_mail(recipients, archiving=True):
 
     # Frist loading all the questions from the persitency and getting the dictionary structure as output
     dictionary_structure = get_questions()
@@ -20,6 +22,11 @@ def send_mail(recipients):
 
     # Sending the message
     send(recipients, message)
+
+    if archiving is True:
+        # Getting the current date and archiving the send mail
+        current_date_string = get_date_string()
+        archive(date_string=current_date_string, mail_content=message)
 
     # Updating the amount of times the chosen questions have been used in the saved files for the subjects
     update_files(dictionary_structure)
