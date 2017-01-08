@@ -1,4 +1,5 @@
 from MailAsks.util import get_gmail_account
+from MailAsks.util import get_config_path
 from MailAsks.util import get_gmail_password
 from MailAsks.util import get_total_uses
 from email.mime.text import MIMEText
@@ -36,7 +37,7 @@ def send(recipient, message):
     send_email(gmail_account, gmail_password, recipient, subject, message)
 
     config_parser = configparser.ConfigParser()
-    config_parser.read('config.ini')
+    config_parser.read(get_config_path())
 
     uses = int(config_parser["Statistic"]["uses"])
     config_parser["Statistic"]["uses"] = str(uses + 1)

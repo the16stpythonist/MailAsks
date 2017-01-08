@@ -1,6 +1,7 @@
 import configparser
 import datetime
 import time
+import os
 
 
 def get_project_path():
@@ -10,15 +11,17 @@ def get_project_path():
     Returns:
     The string with the absolute path leading to the main folder of this project
     """
-    # Creating the config parser to read the contents of the config file, which is in the same folder as this
-    # module
-    config_parser = configparser.ConfigParser()
-    config_parser.read('config.ini')
+    return os.path.dirname(os.path.abspath(__file__))
 
-    # Getting the project path as the item to the key 'project_path' in the 'Paths' header
-    path = config_parser['Paths']['project_path']
-    # Returning the string of the path
-    return path
+
+def get_config_path():
+    """
+    Gets the path of the config file to this project
+    Returns:
+    The string path of this project
+    """
+    config_path = "{}\\config.ini".format(get_project_path())
+    return config_path
 
 
 def get_total_uses():
@@ -31,7 +34,7 @@ def get_total_uses():
     # Creating the config parser to read tge contents of the config file
     # The amount of total uses is saved inside the key 'uses' of the 'Statistic' header
     config_parser = configparser.ConfigParser()
-    config_parser.read('config.ini')
+    config_parser.read(get_config_path())
 
     uses = config_parser['Statistic']['uses']
     uses = int(uses)
@@ -48,7 +51,7 @@ def get_amount_questions():
     # Creating the config parser object to read the config file of the project
     # The information about the amount questions to put into the mail, is saved in the 'questions_amount'
     config_parser = configparser.ConfigParser()
-    config_parser.read('config.ini')
+    config_parser.read(get_config_path())
 
     amount_questions = config_parser["Config"]['questions']
     amount_questions = int(amount_questions)
@@ -65,7 +68,7 @@ def get_gmail_account():
     # Creating the config parser object to read the config file of the project
     # The information about the amount questions to put into the mail, is saved in the 'questions_amount'
     config_parser = configparser.ConfigParser()
-    config_parser.read('config.ini')
+    config_parser.read(get_config_path())
 
     gmail_account = config_parser["Config"]['gmail_account']
     gmail_account = gmail_account
@@ -83,7 +86,7 @@ def get_gmail_password():
     # Creating the config parser object to read the config file of the project
     # The information about the amount questions to put into the mail, is saved in the 'questions_amount'
     config_parser = configparser.ConfigParser()
-    config_parser.read('config.ini')
+    config_parser.read(get_config_path())
 
     gmail_password = config_parser["Config"]['gmail_password']
     gmail_password = gmail_password
@@ -100,7 +103,7 @@ def get_archive_path():
     """
     # Creating the config parser, that reads the INI config file of this project
     config_parser = configparser.ConfigParser()
-    config_parser.read('config.ini')
+    config_parser.read(get_config_path())
 
     archive_path = config_parser['Paths']['archive_path']
 
