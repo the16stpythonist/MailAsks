@@ -38,6 +38,17 @@ def get_subject_folder_path():
     return subject_path
 
 
+def get_config():
+    """
+    This function returns the config parser, which can essentially be used as a dictionary
+    Returns:
+    pass
+    """
+    config_path = get_config_path()
+    config = configparser.ConfigParser(config_path)
+    return config
+
+
 def get_total_uses():
     """
     Reads the config file of the project and returns the total amount of uses, which is essentially the total amount of
