@@ -1,5 +1,9 @@
+"""
+
+"""
 from MailAsks.util import get_project_path
 from MailAsks.util import get_archive_path
+from MailAsks.util import get_subject_path
 
 import os
 
@@ -14,7 +18,7 @@ def get_questions():
     """
     question_dictionary = {}
     # The list, containing all the string paths to the subject files
-    subject_path_list = get_subject_paths()
+    subject_path_list = get_subject_path_list()
 
     for path in subject_path_list:
 
@@ -106,7 +110,7 @@ def content_to_list(subject_content):
     return question_list
 
 
-def get_subject_paths():
+def get_subject_path_list():
     """
     Returns:
     The list of absolute paths to the subject files, that contain the questions
@@ -127,6 +131,28 @@ def get_subject_paths():
             path_list.append(temp_path)
 
     return path_list
+
+
+def get_subject_path_dict():
+    """
+    This function creates a dictionary, that contains the names of the subjects as keys and the absolute paths to
+    the subjects files as values.
+    Returns:
+    A dict with string subject names as keys and the string subject path as value
+    """
+    path_dict = {}
+    # The folder in which the subject files are being saved
+    subject_folder_path = get_subject_path()
+    # The names of all the subject files
+    name_list = os.listdir(subject_folder_path)
+    for subject_name in name_list:
+        # The path to the subject of the current loop name
+        subject_path = os.path.join(subject_folder_path, subject_name)
+        # Checking whether it is a file, in case it is adding the path to the dictionary
+        if os.path.isfile(subject_path):
+            path_dict[subject_name] = subject_path
+
+    return path_dict
 
 
 def update_files(dictionary_structure_chosen):
@@ -212,6 +238,13 @@ def archive(date_string, mail_content):
     # Creating and opening the file with the file path and then writing the given mail content to it
     with open(file_path, "w+") as file:
         file.write(mail_content)
+
+
+# The functions used to RESET the system
+
+def reset(subject):
+    # Getting the subject path
+    subject_path = get_subject_path_list()
 
 
 
