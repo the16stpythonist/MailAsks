@@ -178,6 +178,19 @@ def get_last_sent():
     return timestamp, string
 
 
+def get_last_sent_datetime():
+    """
+    This function reads the config and builds a datetime object for the moment in time, when the last mail was sent
+    Returns:
+    The datetime object of the time the last mail was sent
+    """
+    # Getting the raw data from the config
+    timestamp, string = get_last_sent()
+    # Creating the datetime object
+    last_sent_datetime = datetime.datetime.fromtimestamp(timestamp)
+    return last_sent_datetime
+
+
 def set_last_sent(timestamp):
     """
     This method sets the last sent parameter of the config file
