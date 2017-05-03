@@ -1,9 +1,10 @@
 import configparser
 import datetime
 import time
-import sys
 import os
 
+
+# THE UTILITY FUNCTIONS
 
 def get_project_path():
     """
