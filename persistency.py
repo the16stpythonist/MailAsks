@@ -109,6 +109,7 @@ def content_to_list(subject_content):
     # At the end returning the finished main list with the question tuple lists
     return question_list
 
+
 def get_subject_path(subject):
     """
     This function creates the absolute path of the subject given
@@ -131,18 +132,6 @@ def get_subject_path(subject):
     return subject_path
 
 
-def get_subject_path_list():
-    """
-    This function creates a list of all the paths to the subject files
-    Returns:
-    A list with the absolute string paths to the subject files
-    """
-    # Getting the path dictionary first and then just simply using the values list as the list to return
-    path_dict = get_subject_path_dict()
-    path_list = list(path_dict.values())
-    return path_list
-
-
 def get_subject_path_dict():
     """
     This function creates a dictionary, that contains the names of the subjects as keys and the absolute paths to
@@ -163,6 +152,30 @@ def get_subject_path_dict():
             path_dict[subject_name] = subject_path
 
     return path_dict
+
+
+def get_subject_path_list():
+    """
+    This function creates a list of all the paths to the subject files
+    Returns:
+    A list with the absolute string paths to the subject files
+    """
+    # Getting the path dictionary first and then just simply using the values list as the list to return
+    path_dict = get_subject_path_dict()
+    path_list = list(path_dict.values())
+    return path_list
+
+
+def get_subject_list():
+    """
+    This function creates a list containing all the string names of the subjects currently in the system
+    Returns:
+    A list of the string names of the subjects
+    """
+    # Simply using the path dictionary's keys list
+    path_dict = get_subject_path_dict()
+    names_list = list(path_dict.keys())
+    return names_list
 
 
 def update_files(dictionary_structure_chosen):
@@ -281,6 +294,10 @@ def reset_subject(subject):
                 new_lines.append(line)
         # Writing the new lines into the file
         file.write('\n'.join(new_lines))
+
+
+def reset_all():
+    pass
 
 
 
