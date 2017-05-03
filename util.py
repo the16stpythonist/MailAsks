@@ -161,6 +161,16 @@ def get_date_string():
     return date_string
 
 
+def get_send_time():
+    """
+    This function reads the hour to send the new mail from the config file
+    Returns:
+    The integer number of the hour to send the new mail
+    """
+    config = get_config()
+    return int(config["Config"]["send_time"])
+
+
 def get_last_sent():
     """
     This function reads the config file and returns the last time a mail was sent as the timestamp and the date string

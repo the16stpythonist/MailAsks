@@ -3,6 +3,7 @@ from MailAsks.persistency import update_files
 from MailAsks.persistency import archive
 from MailAsks.format import simple_string_format
 from MailAsks.util import get_amount_questions
+from MailAsks.util import get_last_sent_datetime
 from MailAsks.util import get_date_string
 from MailAsks.pick import choose_questions
 from MailAsks.mail import send
@@ -40,10 +41,12 @@ def send_mail(recipients, archiving=True):
 
 def run():
 
-    last_sent = datetime.datetime.now()
     while True:
         # Waiting a Minute and then checking, if a new mail has to be sent
         time.sleep(60)
+        # Checking whether the time for the new sending has come and whether it has already sent a mail today
+        last_sent = get_last_sent_datetime()
+
 
 
 
