@@ -27,7 +27,7 @@ def get_config_path():
     return config_path
 
 
-def get_subject_path():
+def get_subject_folder_path():
     """
     This function creates the path string for the path leading to the folder in which the subjects are being stored
     Returns:

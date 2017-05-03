@@ -3,7 +3,7 @@
 """
 from MailAsks.util import get_project_path
 from MailAsks.util import get_archive_path
-from MailAsks.util import get_subject_path
+from MailAsks.util import get_subject_folder_path
 
 import os
 
@@ -109,6 +109,27 @@ def content_to_list(subject_content):
     # At the end returning the finished main list with the question tuple lists
     return question_list
 
+def get_subject_path(subject):
+    """
+    This function creates the absolute path of the subject given
+    Args:
+        subject: The string name of the subject
+
+    Returns:
+    The string absolute path to the file of the subject given
+    """
+    # The path to the folder, in which all the subject files are being stored
+    subject_folder_path = get_subject_folder_path()
+    subject_path = os.path.join(subject_folder_path, subject)
+    # Checking if the file exists
+    if not os.path.exists(subject_path):
+        raise FileExistsError("The file '{}' does not exist".format(subject_path))
+    # Checking if it is a file
+    if not os.path.isfile(subject_path):
+        raise TypeError("The path '{}' does not point to a file".format(subject_path))
+
+    return subject_path
+
 
 def get_subject_path_list():
     """
@@ -131,7 +152,7 @@ def get_subject_path_dict():
     """
     path_dict = {}
     # The folder in which the subject files are being saved
-    subject_folder_path = get_subject_path()
+    subject_folder_path = get_subject_folder_path()
     # The names of all the subject files
     name_list = os.listdir(subject_folder_path)
     for subject_name in name_list:
@@ -231,9 +252,8 @@ def archive(date_string, mail_content):
 
 # The functions used to RESET the system
 
-def reset(subject):
-    # Getting the subject path
-    subject_path = get_subject_path_list()
+def reset_subject(subject):
+    # Getting the subject path by the dictionary of all the subject paths
 
 
 
