@@ -112,24 +112,13 @@ def content_to_list(subject_content):
 
 def get_subject_path_list():
     """
+    This function creates a list of all the paths to the subject files
     Returns:
-    The list of absolute paths to the subject files, that contain the questions
+    A list with the absolute string paths to the subject files
     """
-    project_path = get_project_path()
-    path = os.path.join(project_path, "subjects")
-    path_list = []
-    # Getting the names of the files and folders inside the folder of the given path
-    names = os.listdir(path)
-
-    for name in names:
-
-        # Assembling the complete path to the name
-        temp_path = os.path.join(path, name)
-
-        # Checking whether the path belongs to a file, if so adding it to the final list
-        if os.path.isfile(temp_path):
-            path_list.append(temp_path)
-
+    # Getting the path dictionary first and then just simply using the values list as the list to return
+    path_dict = get_subject_path_dict()
+    path_list = list(path_dict.values())
     return path_list
 
 
