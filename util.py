@@ -176,3 +176,24 @@ def get_last_sent():
     string = config["Statistic"]["last_sent"]
 
     return timestamp, string
+
+
+def set_last_sent(timestamp):
+    """
+    This method sets the last sent parameter of the config file
+    Args:
+        timestamp: The float timestamp of the time, to which the last sending time is supposed to be set
+
+    Returns:
+
+    """
+    config = get_config()
+    # Setting the timestamp value directly
+    config["Statistic"]["last_sent_stamp"] = str(timestamp)
+    # Building a datetime object from the timestamp and saving the string representation of that object
+    last_sent = datetime.datetime.fromtimestamp(timestamp)
+    last_sent_string = str(last_sent)
+    config["Statistic"]["last_sent"] = last_sent_string
+
+    # Saving the config file
+    config.write(get_config_path())
