@@ -51,10 +51,6 @@ def run():
         # The datetime object for the current time
         current_datetime = datetime.datetime.fromtimestamp(time.time())
 
-        print(str(last_sent_datetime))
-        print(str(send_time))
-        print(str(current_datetime))
-
         if current_datetime.hour == send_time and last_sent_datetime.day != current_datetime.day:
             send_mail("jonseb1998@gmail.com")
 
