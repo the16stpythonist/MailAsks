@@ -26,6 +26,17 @@ def get_config_path():
     return config_path
 
 
+def get_subject_path():
+    """
+    This function creates the path string for the path leading to the folder in which the subjects are being stored
+    Returns:
+    The string path to the subjects folder
+    """
+    project_path = get_project_path()
+    subject_path = os.path.join(project_path, "subjects")
+    return subject_path
+
+
 def get_total_uses():
     """
     Reads the config file of the project and returns the total amount of uses, which is essentially the total amount of
