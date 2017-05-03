@@ -46,7 +46,7 @@ def get_file_content(subject):
     """
     # Getting the project path and the assembling the complete path with the subject included
     project_path = get_project_path()
-    subject_path = "{}\\subjects\\{}".format(project_path, subject)
+    subject_path = os.path.join(project_path, "subjects", subject)
 
     # Reading the content of the file
     with open(subject_path, "r", encoding='iso-8859-1') as file:
@@ -111,7 +111,8 @@ def get_subject_paths():
     Returns:
     The list of absolute paths to the subject files, that contain the questions
     """
-    path = "{}\\subjects".format(get_project_path())
+    project_path = get_project_path()
+    path = os.path.join(project_path, "subjects")
     path_list = []
     # Getting the names of the files and folders inside the folder of the given path
     names = os.listdir(path)
@@ -119,7 +120,7 @@ def get_subject_paths():
     for name in names:
 
         # Assembling the complete path to the name
-        temp_path = "{}\\{}".format(path, name)
+        temp_path = os.path.join(path, name)
 
         # Checking whether the path belongs to a file, if so adding it to the final list
         if os.path.isfile(temp_path):
@@ -142,14 +143,14 @@ def update_files(dictionary_structure_chosen):
     """
     # Getting the project path and then extending it to be the path to the subjects folder of the project
     project_path = get_project_path()
-    subjects_path = "{}\\subjects".format(project_path)
+    subjects_path = os.path.join(project_path, "subjects")
 
     # Iterating through the files subjects, building the paths to their according files, opening them changing the
     # numbers and then saving them again
     for subject in dictionary_structure_chosen.keys():
         question_list = dictionary_structure_chosen[subject]
         # The path to the file for the subject
-        path = "{}\\{}".format(subjects_path, subject)
+        path = os.path.join(subjects_path, subject)
 
         with open(path, "r", encoding='iso-8859-1') as file:
             # Reading the file and splitting the content into the lines
