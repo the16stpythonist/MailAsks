@@ -200,7 +200,8 @@ def archive(date_string, mail_content):
         # until a number has been found for which no file already exists.
         if os.path.exists(file_path):
             # Adding the index number to the string
-            file_path.replace(".txt", "({}).txt".format(index))
+            file_path = file_path.replace(".txt", "({}).txt".format(index))
+            file_path = file_path.replace("({})".format(index - 1), "")
             index += 1
 
         else:

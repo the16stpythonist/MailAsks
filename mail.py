@@ -41,7 +41,7 @@ def send(recipient, message):
 
     uses = int(config_parser["Statistic"]["uses"])
     config_parser["Statistic"]["uses"] = str(uses + 1)
-    with open("config.ini", "w") as file:
+    with open(get_config_path(), "w") as file:
         config_parser.write(file)
 
 

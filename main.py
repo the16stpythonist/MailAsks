@@ -31,6 +31,8 @@ def send_mail(recipients, archiving=True):
     # Updating the amount of times the chosen questions have been used in the saved files for the subjects
     update_files(dictionary_structure)
 
+    return True
+
 
 if __name__ == "__main__":
     send_mail("jonseb1998@gmail.com")

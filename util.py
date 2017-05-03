@@ -1,6 +1,7 @@
 import configparser
 import datetime
 import time
+import sys
 import os
 
 
@@ -20,7 +21,8 @@ def get_config_path():
     Returns:
     The string path of this project
     """
-    config_path = "{}\\config.ini".format(get_project_path())
+    project_path = get_project_path()
+    config_path = os.path.join(project_path, "config.ini")
     return config_path
 
 
