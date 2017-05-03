@@ -5,6 +5,7 @@ from MailAsks.format import simple_string_format
 from MailAsks.util import get_amount_questions
 from MailAsks.util import get_last_sent_datetime
 from MailAsks.util import get_date_string
+from MailAsks.util import get_send_time
 from MailAsks.pick import choose_questions
 from MailAsks.mail import send
 
@@ -43,13 +44,20 @@ def run():
 
     while True:
         # Waiting a Minute and then checking, if a new mail has to be sent
-        time.sleep(60)
+        time.sleep(10)
         # Checking whether the time for the new sending has come and whether it has already sent a mail today
-        last_sent = get_last_sent_datetime()
+        last_sent_datetime = get_last_sent_datetime()
+        send_time = get_send_time()
+        # The datetime object for the current time
+        current_datetime = datetime.datetime.fromtimestamp(time.time())
 
+        print(str(last_sent_datetime))
+        print(str(send_time))
+        print(str(current_datetime))
 
-
+        if current_datetime.hour == send_time and last_sent_datetime.day != current_datetime.day:
+            send_mail("jonseb1998@gmail.com")
 
 
 if __name__ == "__main__":
-    send_mail("jonseb1998@gmail.com")
+    run()
