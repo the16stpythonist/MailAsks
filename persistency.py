@@ -253,7 +253,34 @@ def archive(date_string, mail_content):
 # The functions used to RESET the system
 
 def reset_subject(subject):
-    # Getting the subject path by the dictionary of all the subject paths
+    """
+    This function will reset the progress of all the questions of the subject given, replacing the numbers stored in
+    the subject file to track the amount of uses with a zero.
+    Args:
+        subject: The string name of the subject, whose questions to reset
+
+    Returns:
+    void
+    """
+    # Getting the subject path
+    subject_path = get_subject_path(subject)
+    # Opening the file and resetting all the use numbers for the questions to 0
+    with open(subject_path, "w+") as file:
+        lines = file.readlines()
+        new_lines = []
+        for line in lines:
+            try:
+                # Removing all the whitespace from the line
+                line = line.replace(" ", "")
+                # Trying if the line only consists of a number
+                int(line)
+                # Adding a zero instead
+                new_lines.append("0")
+            except ValueError:
+                # In case the line is not a number just adding the normal question string to the new list aswell
+                new_lines.append(line)
+        # Writing the new lines into the file
+        file.write('\n'.join(new_lines))
 
 
 
