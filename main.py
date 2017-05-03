@@ -7,6 +7,10 @@ from MailAsks.util import get_date_string
 from MailAsks.pick import choose_questions
 from MailAsks.mail import send
 
+import datetime
+import time
+
+
 
 def send_mail(recipients, archiving=True):
 
@@ -32,6 +36,16 @@ def send_mail(recipients, archiving=True):
     update_files(dictionary_structure)
 
     return True
+
+
+def run():
+
+    last_sent = datetime.datetime.now()
+    while True:
+        # Waiting a Minute and then checking, if a new mail has to be sent
+        time.sleep(60)
+
+
 
 
 if __name__ == "__main__":

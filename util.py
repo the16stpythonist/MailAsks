@@ -159,3 +159,20 @@ def get_date_string():
     date_string = ''.join(date_string_list)
 
     return date_string
+
+
+def get_last_sent():
+    """
+    This function reads the config file and returns the last time a mail was sent as the timestamp and the date string
+    Returns:
+    A tuple, whose first item is the float timestamp of the time a mail was sent and the second item being the string
+    about that time
+    """
+    config = get_config()
+    # Getting the float timestamp from the config
+    timestamp = config["Statistic"]["last_sent_stamp"]
+    timestamp = float(timestamp)
+    # Getting the representative string from the config
+    string = config["Statistic"]["last_sent"]
+
+    return timestamp, string
