@@ -297,7 +297,17 @@ def reset_subject(subject):
 
 
 def reset_all():
-    pass
+    """
+    This function will reset the progress on all the subjects.
+    Returns:
+    void
+    """
+    # Getting a list of all the subjects currently in the system
+    subject_list = get_subject_list()
+    # For each subject running the reset function
+    for subject in subject_list:
+        reset_subject(subject)
+
 
 
 
