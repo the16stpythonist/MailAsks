@@ -4,6 +4,7 @@ from MailAsks.persistency import archive
 from MailAsks.format import simple_string_format
 from MailAsks.util import get_amount_questions
 from MailAsks.util import get_last_sent_datetime
+from MailAsks.util import set_last_sent
 from MailAsks.util import get_date_string
 from MailAsks.util import get_send_time
 from MailAsks.pick import choose_questions
@@ -53,6 +54,7 @@ def run():
 
         if current_datetime.hour == send_time and last_sent_datetime.day != current_datetime.day:
             send_mail("jonseb1998@gmail.com")
+            set_last_sent(time.time())
 
 
 if __name__ == "__main__":
