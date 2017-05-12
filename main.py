@@ -15,6 +15,14 @@ import datetime
 import time
 
 
+class TimingService(threading.Thread):
+    """
+    This object is supposed to wrap the functionality of accessing the time of lase sent from the config
+    """
+    def __init__(self, config):
+        pass
+
+
 class MailAsksService(threading.Thread):
     """
     This class is supposed to be the main Thread of the whole operation
