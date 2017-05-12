@@ -10,14 +10,23 @@ from MailAsks.util import get_send_time
 from MailAsks.pick import choose_questions
 from MailAsks.mail import send
 
+import threading
 import datetime
 import time
 
 
+class MailAsksService(threading.Thread):
+    """
+    This class is supposed to be the main Thread of the whole operation
+    """
+
+    def __init__(self, config):
+        pass
+
 
 def send_mail(recipients, archiving=True):
 
-    # Frist loading all the questions from the persitency and getting the dictionary structure as output
+    # First loading all the questions from the persitency and getting the dictionary structure as output
     dictionary_structure = get_questions()
 
     # Now choosing the questions to actually use according with the algorithm
