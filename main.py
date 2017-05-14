@@ -15,12 +15,29 @@ import datetime
 import time
 
 
-class TimingService(threading.Thread):
+class Timing(threading.Thread):
     """
     This object is supposed to wrap the functionality of accessing the time of lase sent from the config
     """
     def __init__(self, config):
-        pass
+        # Initializing the super class
+        threading.Thread.__init__(self)
+        self.config = config
+
+    @property
+    def last_sent(self):
+        """
+        This method simulates the last_sent entry in the config file to ba a property of the object. The method
+        reads the data from the config dictionary, creates a datetime object from the read timestamp and returns the
+        datetime object, which describes, when the last mail was sent
+        Returns:
+        The datetime object about the point in time the last mail was sent
+        """
+        # getting the timestamp from the last send time
+        last_sent_stamp = self.config["Statistic"]["last_sent_stamp"]
+        # Creating a datetime object from the read timestamp
+        last_sent_datetime = datetime.datetime.fromtimestamp(last_sent_stamp)
+        return last_sent_datetime
 
 
 class MailAsksService(threading.Thread):
